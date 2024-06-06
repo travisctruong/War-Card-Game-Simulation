@@ -1,15 +1,20 @@
 package war;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Player {
 
 	private ArrayList<Card> hand;
+	private ArrayList<Card> winnings;
 	private String name;
+	private int usedCards;
 	
 	
 	public Player(String name) {
 		this.hand = new ArrayList<Card>();
+		this.winnings = new ArrayList<Card>();
 		this.name = name;
+		this.usedCards = 0;
 	}
 	
 	
@@ -19,12 +24,22 @@ public class Player {
 	
 	
 	public String getName() {
-		return this.name;
+		return name;
 	}
 	
 	
 	public int getScore() {
-		return this.hand.size();
+		return hand.size() + winnings.size();
+	}
+	
+	
+	public int getUsedCards() {
+		return usedCards;
+	}
+	
+	
+	public void resetUsed() {
+		usedCards = 0;
 	}
 	
 	
@@ -34,13 +49,25 @@ public class Player {
 	
 	
 	public Card playCard() {
+		if (hand.size() == 0 && winnings.size() != 0) {
+			transferWinnings();
+		}
+		usedCards += 1;
 		return hand.remove(0);
 	}
 	
 	
 	public void winRound(ArrayList<Card> cards) {
 		for (Card card : cards) {
-			hand.add(card);
+			winnings.add(card);
+		}
+	}
+	
+	
+	public void transferWinnings() {
+		Collections.shuffle(winnings);
+		while (winnings.size() != 0) {
+			hand.add(winnings.remove(0));
 		}
 	}
 }

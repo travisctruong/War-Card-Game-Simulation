@@ -55,6 +55,12 @@ public class Game {
 	}
 	
 	
+	public void resetUsed() {
+		player1.resetUsed();
+		player2.resetUsed();
+	}
+	
+	
 	public void assembleCards(Card card1, Card card2, ArrayList<Card> cards) {
 		cards.add(card1);
 		cards.add(card2);
@@ -70,10 +76,12 @@ public class Game {
 		
 		if (card1.getValue() > card2.getValue()) {
 			player1.winRound(cards);
+			resetUsed();
 			System.out.println(player1.getName() + "'s " + card1.getRank() + " of " + card1.getSuit() + " beat " + player2.getName() + "'s " + card2.getRank() + " of " + card2.getSuit() + " (" + player1.getScore() + "-" + player2.getScore() + ")");
 		}
 		else if (card1.getValue() < card2.getValue()) {
 			player2.winRound(cards);
+			resetUsed();
 			System.out.println(player2.getName() + "'s " + card2.getRank() + " of " + card2.getSuit() + " beat " + player1.getName() + "'s " + card1.getRank() + " of " + card1.getSuit() + " (" + player1.getScore() + "-" + player2.getScore() + ")");
 		}
 		else {
@@ -86,10 +94,12 @@ public class Game {
 			}
 			else if (player1.getScore() == 0) {
 				player2.winRound(cards);
+				resetUsed();
 				System.out.println(player1.getName() + " has insufficient cards to play out the war");
 			}
 			else if (player2.getScore() == 0) {
 				player1.winRound(cards);
+				resetUsed();
 				System.out.println(player2.getName() + " has insufficient cards to play out the war");
 			}
 			else {
@@ -139,14 +149,16 @@ public class Game {
 		if (card1.getValue() > card2.getValue()) {
 			player1.winRound(cards);
 			System.out.println(player1.getName() + "'s " + card1.getRank() + " of " + card1.getSuit() + " beat " + player2.getName() + "'s " + card2.getRank() + " of " + card2.getSuit());
-			System.out.println(player1.getName() + " wins the war and gains " + cards.size()/2 + " cards!" + " (" + player1.getScore() + "-" + player2.getScore() + ")");
+			System.out.println(player1.getName() + " wins the war and gains " + player2.getUsedCards() + " cards!" + " (" + player1.getScore() + "-" + player2.getScore() + ")");
 			System.out.println();
+			resetUsed();
 		}
 		else if (card1.getValue() < card2.getValue()) {
 			player2.winRound(cards);
 			System.out.println(player2.getName() + "'s " + card2.getRank() + " of " + card2.getSuit() + " beat " + player1.getName() + "'s " + card1.getRank() + " of " + card1.getSuit());
-			System.out.println(player2.getName() + " wins the war and gains " + cards.size()/2 + " cards!" + " (" + player1.getScore() + "-" + player2.getScore() + ")");
+			System.out.println(player2.getName() + " wins the war and gains " + player1.getUsedCards() + " cards!" + " (" + player1.getScore() + "-" + player2.getScore() + ")");
 			System.out.println();
+			resetUsed();
 		}
 		else {
 			System.out.println("Both players played " + card2.getRank() + " of " + card2.getSuit());
@@ -173,17 +185,20 @@ public class Game {
 				cards.add(tempCard);
 			}
 			card2 = player2.playCard();
+			cards.add(card2);
 			if (card1.getValue() > card2.getValue()) {
 				player1.winRound(cards);
 				System.out.println(player1.getName() + "'s " + card1.getRank() + " of " + card1.getSuit() + " beat " + player2.getName() + "'s " + card2.getRank() + " of " + card2.getSuit());
-				System.out.println(player1.getName() + " wins the war and gains " + cards.size() + " cards!" + " (" + player1.getScore() + "-" + player2.getScore() + ")");
+				System.out.println(player1.getName() + " wins the war and gains " + player2.getUsedCards() + " cards!" + " (" + player1.getScore() + "-" + player2.getScore() + ")");
 				System.out.println();
+				resetUsed();
 			}
 			else if (card1.getValue() < card2.getValue()) {
 				player2.winRound(cards);
 				System.out.println(player2.getName() + "'s " + card2.getRank() + " of " + card2.getSuit() + " beat " + player1.getName() + "'s " + card1.getRank() + " of " + card1.getSuit());
-				System.out.println(player2.getName() + " wins the war and gains " + cards.size() + " cards!" + " (" + player1.getScore() + "-" + player2.getScore() + ")");
+				System.out.println(player2.getName() + " wins the war and gains " + player1.getUsedCards() + " cards!" + " (" + player1.getScore() + "-" + player2.getScore() + ")");
 				System.out.println();
+				resetUsed();
 			}
 			else {
 				System.out.println("Both players played " + card2.getRank() + " of " + card2.getSuit());
@@ -202,14 +217,16 @@ public class Game {
 			if (card1.getValue() > card2.getValue()) {
 				player1.winRound(cards);
 				System.out.println(player1.getName() + "'s " + card1.getRank() + " of " + card1.getSuit() + " beat " + player2.getName() + "'s " + card2.getRank() + " of " + card2.getSuit());
-				System.out.println(player1.getName() + " wins the war and gains " + cards.size() + " cards!" + " (" + player1.getScore() + "-" + player2.getScore() + ")");
+				System.out.println(player1.getName() + " wins the war and gains " + player2.getUsedCards() + " cards!" + " (" + player1.getScore() + "-" + player2.getScore() + ")");
 				System.out.println();
+				resetUsed();
 			}
 			else if (card1.getValue() < card2.getValue()) {
 				player2.winRound(cards);
 				System.out.println(player2.getName() + "'s " + card2.getRank() + " of " + card2.getSuit() + " beat " + player1.getName() + "'s " + card1.getRank() + " of " + card1.getSuit());
-				System.out.println(player2.getName() + " wins the war and gains " + cards.size() + " cards!" + " (" + player1.getScore() + "-" + player2.getScore() + ")");
+				System.out.println(player2.getName() + " wins the war and gains " + player1.getUsedCards() + " cards!" + " (" + player1.getScore() + "-" + player2.getScore() + ")");
 				System.out.println();
+				resetUsed();
 			}
 			else {
 				System.out.println("Both players played " + card2.getRank() + " of " + card2.getSuit());

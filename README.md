@@ -1,6 +1,5 @@
 # War-Card-Game-Simulation
-Simulation of the card game War
-Preliminary code to user controlled interface of War
+Simulation of the card game War, preliminary code to user controlled interface of War
 
 Rules:
 A standard deck of playing cards is shuffled and evenly distributed to two players. Every round, each player reveals their top card in unison and the player revealing the card of higher rank wins both of the cards in play. If both players reveal a card of the same rank, the game enters "War" where each player must then allocate 3 of their top cards as face-down cards and then reveal their fourth card. The player revealing the card of higher rank wins all cards introduced during the round. The game continues until one player has no more cards left. 

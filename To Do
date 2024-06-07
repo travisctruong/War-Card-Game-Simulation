@@ -1,0 +1,1 @@
+Cut down the number of conditional statements in Game class - can be merged (i.e. warAgainSmall method)
